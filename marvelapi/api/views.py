@@ -3,6 +3,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 from .services.url_generator import URLGenerator
+from .services.transformer_response import TransformResponse
 import requests
 # Create your views here.
 class MarvelCharactersAPIView(APIView):
@@ -19,8 +20,9 @@ class MarvelCharactersAPIView(APIView):
 
             # Extrae la lista de números
             data = response.json()
+            dataresponse= TransformResponse.transform_response(data)
                         
-            return Response(data, status=200)
+            return Response(dataresponse, status=200)
 
         except requests.exceptions.RequestException as e:
             return Response({"error": f"No se pudo conectar al servicio externo: {str(e)}"}, status=500)
