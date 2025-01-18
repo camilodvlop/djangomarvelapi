@@ -9,12 +9,20 @@ hash - a md5 digest of the ts parameter, your private key and your public key (e
 This project uses Django and djangorestframework (DRF) to work as a REST API
 using powershell install the dependencies
 pip install django djangorestframework requests
+pip install python-decouple  # para poder obtener las variables de entorno
 django-admin startproject marvelapi  # to create a django project
 cd .\marvelapi\  # to stand in the new folder created
  python manage.py startapp api    # creates a folder called api with python classes
 
+python manage.py runserver  # corre el servicio localmente
+
+
+
+
 ** To run the project **
 if you use docker:
+docker build -t django-marvel-api . 
+docker run -p 8000:8000 django-marvel-api
 
 
 
