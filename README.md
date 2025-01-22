@@ -25,4 +25,36 @@ docker build -t django-marvel-api .
 docker run -p 8000:8000 django-marvel-api
 
 
+# create EC2 instance with AMI of Ubuntu  // crear instancia ec2 en AWS tipo ubuntu
+# para instalar docker  Actualizar el sistema:
+sudo apt-get update -y
+sudo apt-get upgrade -y
+# Instalar dependencias necesarias:
+sudo apt-get install apt-transport-https ca-certificates curl software-properties-common -y
+# Agregar el repositorio de Docker
+# Añadir la clave GPG oficial de Docker para verificar la autenticidad de los paquetes
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+# Añadir el repositorio de Docker para Ubuntu:
+sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+# Actualizar el índice de paquetes:
+sudo apt-get update -y
+# instalar Docker:
+sudo apt-get install docker-ce docker-ce-cli containerd.io -y
+# Iniciar y habilitar Docker
+sudo systemctl start docker
+sudo systemctl enable docker
+# Verificar la instalación de Docker
+sudo docker --version
+# Permitir el uso de Docker sin sudo
+sudo usermod -aG docker $USER
+newgrp docker
+# Verificar que Docker funciona sin
+docker --version
+# Obtener la imagen desde Docker Hub
+docker pull camilodvlop/django-marvel-api:v1
+# verificar las imágenes descargadas
+docker images
+# Ejecutar el contenedor
+docker run -p 80:8000 camilodvlop/django-marvel-api:v1
+docker ps
 
